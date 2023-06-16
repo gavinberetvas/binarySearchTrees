@@ -1,4 +1,4 @@
-import { printMessage } from "./module.js";
+import { printMessage } from "./node.js";
 
 printMessage();
 
