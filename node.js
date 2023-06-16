@@ -1,12 +1,8 @@
-export function printMessage() {
-    console.log(node);
-}
-
 export class Node {
     constructor(data) {
-        this.data = data;
-        this.right = null;
-        this.left = null;
+        this.value = data;
+        this.rightChild = null;
+        this.leftChild = null;
       }
 }
 
