@@ -93,6 +93,12 @@ class BinarySearchTree {
   }
 
   find(data, root = this.root) {
+    return (root === null || data === root.value)
+    ? root
+    : (data < root.value)
+      ? this.find(data, root.leftChild)
+      : this.find(data, root.rightChild);
+
     // if (root === null || data === root.value) {
     //   return root;
     // }
@@ -102,29 +108,35 @@ class BinarySearchTree {
     // } else if (data > root.value) {
     //   return this.find(data, root.rightChild);
     // }
-
-    return (root === null || data === root.value)
-    ? root
-    : (data < root.value)
-      ? this.find(data, root.leftChild)
-      : this.find(data, root.rightChild);
   }
 
+  height(node) {
+    //calculate edges
+    //return edges
+  }
 
-  levelOrderTraversal(arr = [], queue = [], root = this.root) {
-    if (root == null) return;
+  depth(node){
 
-    arr.push(root.value);
-    queue.push(root.leftChild);
-    queue.push(root.rightChild);
+  }
 
+  levelOrderTraversal(result = [], queue = [], root = this.root) {
+    if (this.root === null) return
+    
+    queue.push(this.root);
     while (queue.length) {
-      const level = queue[0];
-      queue.shift();
+      const node = queue.shift();
+      result.push(node.value);
 
-      this.levelOrderTraversal(arr, queue, level);
+      if (node.leftChild) {
+        queue.push(node.leftChild);
+      }
+
+      if (node.rightChild) {
+        queue.push(node.rightChild);
+      }
     }
-    return arr;
+
+    return result;
   }
 }
 
@@ -133,12 +145,10 @@ let item = new BinarySearchTree(testArray);
 item.prettyPrint();
 item.insert(1117);
 item.prettyPrint();
-
-console.log("find test", item.find(1))
-
 item.delete(4);
 item.prettyPrint();
 item.delete(5);
 item.prettyPrint();
-console.log("here you go", item.levelOrderTraversal());
-console.log("find test", item.find(8))
+console.log("level order: ", item.levelOrderTraversal());
+console.log("find test: ", item.find(1))
+console.log("find test: ", item.find(8))
