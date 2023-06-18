@@ -44,17 +44,44 @@ class BinarySearchTree {
     }
   }
 
-  insert() {
+  insert(data, root = this.root) {
+    if (root === null) {
+      root = new Node(data);
+      return root;
+    }
+   
+    if (data < root.value) {
+      root.leftChild = this.search(data, root.leftChild)
+    } else if (data > root.value) {
+      root.rightChild = this.search(data, root.rightChild)
+    }
+
+    return root
 
   }
+  
 
-  delete() {
+  delete(value, root = this.root) {
+
+    console.log
+
+
+    //3 cases
+    //delete a leaf
+    //delete a node with one child
+    //delete node with two children
     
   }
+
+  levelOrderTraversal(value, root = this.root) {
+    console.log(root.value);
+    
+
 }
 
-
-
-let testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+///testing///
+let testArray = [1, 2, 6, 11, 17, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let item = new BinarySearchTree(testArray);
+item.prettyPrint();
+item.insert(1117);
 item.prettyPrint();

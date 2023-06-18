@@ -5,5 +5,3 @@ export class Node {
         this.leftChild = null;
       }
 }
-
-let node = new Node("data")
