@@ -93,12 +93,21 @@ class BinarySearchTree {
   }
 
   find(data, root = this.root) {
-    if (root === null || data === root.value) {
-      return root;
-    }
+    // if (root === null || data === root.value) {
+    //   return root;
+    // }
 
-    data < root.value ? this.find(data, root.leftChild) : this.find(data, root.rightChild);
+    // if (data < root.value) {
+    //   return this.find(data, root.leftChild);
+    // } else if (data > root.value) {
+    //   return this.find(data, root.rightChild);
+    // }
 
+    return (root === null || data === root.value)
+    ? root
+    : (data < root.value)
+      ? this.find(data, root.leftChild)
+      : this.find(data, root.rightChild);
   }
 
 
