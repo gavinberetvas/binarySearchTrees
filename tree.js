@@ -78,19 +78,35 @@ class BinarySearchTree {
       } else if (root.leftChild && root.rightChild) {
         //get next largest value
         const findMinimumValue = (node) => {
-          while(node.leftChild != null) {
-            node = node.leftChild
+          while (node.leftChild != null) {
+            node = node.leftChild;
           }
-          return node
-        }
+          return node;
+        };
 
-        root.value = findMinimumValue(root.rightChild).value
-        root.rightChild = this.delete(root.value, root.rightChild)
+        root.value = findMinimumValue(root.rightChild).value;
+        root.rightChild = this.delete(root.value, root.rightChild);
       }
     }
 
     return root;
   }
+
+  find(data, root = this.root) {
+    if (root === null || data === root.value) {
+      return root;
+    }
+
+    // if (data < root.value) {
+    //   this.find(data, root.leftChild);
+    // } else if (data > root.value) {
+    //   this.find(data, root.rightChild);
+    // }
+
+    data < root.value ? this.find(data, root.leftChild) : this.find(data, root.rightChild);
+
+  }
+
 
   levelOrderTraversal(arr = [], queue = [], root = this.root) {
     if (root == null) return;
@@ -105,8 +121,7 @@ class BinarySearchTree {
 
       this.levelOrderTraversal(arr, queue, level);
     }
-    console.log("test", arr);
-    console.log("queuelevels", level2);
+    return arr;
   }
 }
 
@@ -115,8 +130,12 @@ let item = new BinarySearchTree(testArray);
 item.prettyPrint();
 item.insert(1117);
 item.prettyPrint();
+
+console.log("find test", item.find(1))
+
 item.delete(4);
 item.prettyPrint();
 item.delete(5);
 item.prettyPrint();
-// item.levelOrderTraversal()
+console.log("here you go", item.levelOrderTraversal());
+console.log("find test", item.find(8))
