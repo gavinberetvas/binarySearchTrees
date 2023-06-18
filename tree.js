@@ -84,10 +84,6 @@ class BinarySearchTree {
           return node
         }
 
-        // const nextLargestValue = findMinimumValue(root.rightChild)
-        // root.value = nextLargestValue.value;
-        // root.rightChild = this.delete(nextLargestValue.value, root.rightChild)
-
         root.value = findMinimumValue(root.rightChild).value
         root.rightChild = this.delete(root.value, root.rightChild)
       }
@@ -124,10 +120,3 @@ item.prettyPrint();
 item.delete(5);
 item.prettyPrint();
 // item.levelOrderTraversal()
-
-// function findMinimumValue(root) {
-//   while(root.leftChild != null) {
-//     root = root.leftChild
-//   }
-//   return root
-// }
