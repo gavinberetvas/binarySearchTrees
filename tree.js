@@ -97,12 +97,6 @@ class BinarySearchTree {
       return root;
     }
 
-    // if (data < root.value) {
-    //   this.find(data, root.leftChild);
-    // } else if (data > root.value) {
-    //   this.find(data, root.rightChild);
-    // }
-
     data < root.value ? this.find(data, root.leftChild) : this.find(data, root.rightChild);
 
   }
