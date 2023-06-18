@@ -5,8 +5,10 @@ class BinarySearchTree {
     this.root = this.buildTree(array);
   }
   #sortRemoveDuplicates(array) {
-    const sortedArray = array.sort((a, b) => a - b);
-    const noDuplicateValuesArray = [...new Set(sortedArray)];
+    // const sortedArray = array.sort((a, b) => a - b);
+    // const noDuplicateValuesArray = [...new Set(sortedArray)];
+
+    const noDuplicateValuesArray = [...new Set(array.sort((a, b) => a - b))];
     return noDuplicateValuesArray;
   }
 
@@ -93,35 +95,16 @@ class BinarySearchTree {
   }
 
   find(data, root = this.root) {
-    return (root === null || data === root.value)
-    ? root
-    : (data < root.value)
+    return root === null || data === root.value
+      ? root
+      : data < root.value
       ? this.find(data, root.leftChild)
       : this.find(data, root.rightChild);
-
-    // if (root === null || data === root.value) {
-    //   return root;
-    // }
-
-    // if (data < root.value) {
-    //   return this.find(data, root.leftChild);
-    // } else if (data > root.value) {
-    //   return this.find(data, root.rightChild);
-    // }
-  }
-
-  height(node) {
-    //calculate edges
-    //return edges
-  }
-
-  depth(node){
-
   }
 
   levelOrderTraversal(result = [], queue = [], root = this.root) {
-    if (this.root === null) return
-    
+    if (this.root === null) return;
+
     queue.push(this.root);
     while (queue.length) {
       const node = queue.shift();
@@ -138,6 +121,23 @@ class BinarySearchTree {
 
     return result;
   }
+
+  height(node) {
+    //calculate edges
+    //return edges
+  }
+
+  depth(node) {}
+
+  isbalanced() {
+    //true or false
+  }
+
+  rebalance() {
+    let newTree = [...new Set(this.levelOrderTraversal().sort((a, b) => a - b))];
+    this.root = this.buildTree(newTree);
+    return newTree;
+  }
 }
 
 let testArray = [1, 2, 6, 11, 17, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -150,5 +150,9 @@ item.prettyPrint();
 item.delete(5);
 item.prettyPrint();
 console.log("level order: ", item.levelOrderTraversal());
-console.log("find test: ", item.find(1))
-console.log("find test: ", item.find(8))
+console.log("find test: ", item.find(1));
+console.log("find test: ", item.find(8));
+item.delete(8);
+item.prettyPrint();
+console.log("rebalance: ", item.rebalance());
+item.prettyPrint();
