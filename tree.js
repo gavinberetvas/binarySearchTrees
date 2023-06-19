@@ -124,18 +124,29 @@ class BinarySearchTree {
 
   prepostinorder() {}
 
-  treeHeight(data, root = data ? this.find(data) : this.root) {
+  height(node, root = node ? this.find(node) : this.root) {
     if (root == null) return -1;
-    let lh = this.treeHeight(data, root.leftChild);
-    let rh = this.treeHeight(data, root.rightChild);
-    return lh > rh ? lh + 1 : rh + 1;
+    let lh = this.height(node, root.leftChild);
+    let rh = this.height(node, root.rightChild);
+    return lh > rh ? lh + 1 : rh + 1; }
+
+  depth(data, root = this.root, depth = 0) {
+    if (root == null|| data == null) return 0;
+
+    if (data == root.value) return depth;
+
+    if (data < root.value) {
+      return this.depth(data, root.leftChild, depth += 1);
+    } else {
+      return this.depth(data, root.rightChild, depth += 1);
+    }
+
+  
   }
 
-  depth(node) {}
-
   isbalanced(root = this.root) {
-    const lHeight = this.treeHeight(root.leftChild);
-    const rHeight = this.treeHeight(root.rightChild);
+    const lHeight = this.height(root.leftChild);
+    const rHeight = this.height(root.rightChild);
 
     if (Math.abs(lHeight - rHeight) >= 2) {
       return false;
@@ -173,10 +184,17 @@ item.insert(1118);
 item.insert(9999);
 item.insert(11118);
 item.prettyPrint();
-console.log("tree height:", item.treeHeight());
+console.log("tree height:", item.height());
 console.log("balancing act:", item.isbalanced());
 console.log("rebalance: ", item.rebalance());
 console.log("balancing act:", item.isbalanced());
 item.prettyPrint();
 
-console.log("node height:", item.nodeHeight(11118));
+console.log("node height:", item.height(11118));
+console.log("node depth1:", item.depth(11118));
+
+console.log("node height:", item.height(17));
+console.log("node depth2:", item.depth(17));
+
+console.log("node height:", item.height(6));
+console.log("node depth:3", item.depth(6));
