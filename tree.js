@@ -124,22 +124,6 @@ class BinarySearchTree {
 
   prepostinorder() {}
 
-  // nodeHeight(data, root = this.find(data)) {
-  
-  //   if (root == null) return -1;
-  //   let lh = this.nodeHeight(data, root.leftChild);
-  //   let rh = this.nodeHeight(data, root.rightChild);
-  //   return lh > rh ? lh + 1 : rh + 1
-  // }
-
-  // treeHeight(root = this.root) {
-  
-  //   if (root == null) return -1;
-  //   let lh = this.treeHeight(root.leftChild);
-  //   let rh = this.treeHeight(root.rightChild);
-  //   return lh > rh ? lh + 1 : rh + 1
-  // }
-
   treeHeight(data, root = data ? this.find(data) : this.root) {
     if (root == null) return -1;
     let lh = this.treeHeight(data, root.leftChild);
@@ -196,4 +180,3 @@ console.log("balancing act:", item.isbalanced());
 item.prettyPrint();
 
 console.log("node height:", item.nodeHeight(11118));
-
