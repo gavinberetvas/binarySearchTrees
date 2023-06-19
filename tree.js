@@ -122,19 +122,48 @@ class BinarySearchTree {
     return result;
   }
 
-  height(node) {
-    //calculate edges
-    //return edges
+  prepostinorder() {}
+
+  // nodeHeight(data, root = this.find(data)) {
+  
+  //   if (root == null) return -1;
+  //   let lh = this.nodeHeight(data, root.leftChild);
+  //   let rh = this.nodeHeight(data, root.rightChild);
+  //   return lh > rh ? lh + 1 : rh + 1
+  // }
+
+  // treeHeight(root = this.root) {
+  
+  //   if (root == null) return -1;
+  //   let lh = this.treeHeight(root.leftChild);
+  //   let rh = this.treeHeight(root.rightChild);
+  //   return lh > rh ? lh + 1 : rh + 1
+  // }
+
+  treeHeight(data, root = data ? this.find(data) : this.root) {
+    if (root == null) return -1;
+    let lh = this.treeHeight(data, root.leftChild);
+    let rh = this.treeHeight(data, root.rightChild);
+    return lh > rh ? lh + 1 : rh + 1;
   }
 
   depth(node) {}
 
-  isbalanced() {
-    //true or false
+  isbalanced(root = this.root) {
+    const lHeight = this.treeHeight(root.leftChild);
+    const rHeight = this.treeHeight(root.rightChild);
+
+    if (Math.abs(lHeight - rHeight) >= 2) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   rebalance() {
-    let newTree = [...new Set(this.levelOrderTraversal().sort((a, b) => a - b))];
+    let newTree = [
+      ...new Set(this.levelOrderTraversal().sort((a, b) => a - b)),
+    ];
     this.root = this.buildTree(newTree);
     return newTree;
   }
@@ -156,3 +185,15 @@ item.delete(8);
 item.prettyPrint();
 console.log("rebalance: ", item.rebalance());
 item.prettyPrint();
+item.insert(1118);
+item.insert(9999);
+item.insert(11118);
+item.prettyPrint();
+console.log("tree height:", item.treeHeight());
+console.log("balancing act:", item.isbalanced());
+console.log("rebalance: ", item.rebalance());
+console.log("balancing act:", item.isbalanced());
+item.prettyPrint();
+
+console.log("node height:", item.nodeHeight(11118));
+
