@@ -122,26 +122,72 @@ class BinarySearchTree {
     return result;
   }
 
-  prepostinorder() {}
+  preorder(values = [], root = this.root) {
+    if (root == null) return;
+
+    values.push(root.value);
+    console.log(root.value);
+    this.preorder(values, root.leftChild);
+    this.preorder(values, root.rightChild);
+
+    return values;
+
+    //visit root
+
+    //visit left subtree
+    //visit right subtree
+  }
+
+  inorder(values = [], root = this.root) {
+    if (root == null) return;
+
+    this.inorder(values, root.leftChild);
+
+    values.push(root.value);
+    console.log(root.value);
+
+    this.inorder(values, root.rightChild);
+
+    return values;
+
+    //left subtree
+    //root
+    //right subtree
+  }
+
+  postorder(values = [], root = this.root) {
+    if (root == null) return;
+
+    this.postorder(values, root.leftChild);
+    this.postorder(values, root.rightChild);
+
+    values.push(root.value);
+    console.log(root.value);
+
+    return values;
+
+    //left subtree
+    //right subtree
+    //root
+  }
 
   height(node, root = node ? this.find(node) : this.root) {
     if (root == null) return -1;
     let lh = this.height(node, root.leftChild);
     let rh = this.height(node, root.rightChild);
-    return lh > rh ? lh + 1 : rh + 1; }
+    return lh > rh ? lh + 1 : rh + 1;
+  }
 
   depth(data, root = this.root, depth = 0) {
-    if (root == null|| data == null) return 0;
+    if (root == null || data == null) return 0;
 
     if (data == root.value) return depth;
 
     if (data < root.value) {
-      return this.depth(data, root.leftChild, depth += 1);
+      return this.depth(data, root.leftChild, (depth += 1));
     } else {
-      return this.depth(data, root.rightChild, depth += 1);
+      return this.depth(data, root.rightChild, (depth += 1));
     }
-
-  
   }
 
   isbalanced(root = this.root) {
@@ -164,10 +210,15 @@ class BinarySearchTree {
   }
 }
 
+
 let testArray = [1, 2, 6, 11, 17, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let item = new BinarySearchTree(testArray);
 item.prettyPrint();
 item.insert(1117);
+console.log(item.preorder());
+console.log(item.postorder());
+console.log(item.inorder());
+console.log(item.levelOrderTraversal());
 item.prettyPrint();
 item.delete(4);
 item.prettyPrint();
@@ -189,12 +240,11 @@ console.log("balancing act:", item.isbalanced());
 console.log("rebalance: ", item.rebalance());
 console.log("balancing act:", item.isbalanced());
 item.prettyPrint();
-
 console.log("node height:", item.height(11118));
 console.log("node depth1:", item.depth(11118));
-
 console.log("node height:", item.height(17));
 console.log("node depth2:", item.depth(17));
-
 console.log("node height:", item.height(6));
 console.log("node depth:3", item.depth(6));
+
+
