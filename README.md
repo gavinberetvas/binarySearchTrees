@@ -18,7 +18,7 @@ This project was to familiarize myself with some basic DSA concepts. I construct
 * Visual Studio Code
 
 ## Features
-##### Constructs a class with several methods.
+#### Constructs a class with several methods:
 * **buildTree**: takes an array and builds a balanced binary search tree.
 * **prettyPrint** (pictured above): visualize the balanced search tree in terminal. (borrowed from the [Odin Project](https://www.theodinproject.com/lessons/javascript-binary-search-trees)).
 * **insert/delete**: takes a numerical value and insert/deletes various nodes without rebalancing.
